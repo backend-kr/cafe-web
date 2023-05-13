@@ -15,7 +15,7 @@ const renderSearchBar = () => {
                     padding: '8px',
                     marginTop: '10px',
                     marginLeft: '32px',
-                    marginRight: '100px', // 이 부분 수정
+                    marginRight: '100px', 
                     boxShadow: '0 10px 10px rgba(0.3, 0.5, 10, 0.1)',
                     width: '85%',
                 }}
@@ -29,7 +29,7 @@ const renderSearchBar = () => {
                     sx={{
                         flexGrow: 10,
                         marginLeft: '8px',
-                        marginRight: '32px', 
+                        marginRight: '32px',
                     }}
                 />
             </Box>
