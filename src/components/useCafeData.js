@@ -53,6 +53,5 @@ const useCafeData = (currentLocation) => {
 
     return { cafeData, nearbyCafeData };
 };
-// 
 
 export default useCafeData;
