@@ -1,8 +1,8 @@
+version: '3'
+
 services:
   react-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: 221.155.148.197:5000/cafe_web-react-app:latest
     container_name: cafe-web
     ports:
       - "172.22.0.1:3000:80"
