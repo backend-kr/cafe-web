@@ -29,7 +29,7 @@ const renderSearchBar = () => {
                     sx={{
                         flexGrow: 10,
                         marginLeft: '8px',
-                        marginRight: '32px', // 오른쪽 패딩 크기를 설정합니다.
+                        marginRight: '32px', 
                     }}
                 />
             </Box>
