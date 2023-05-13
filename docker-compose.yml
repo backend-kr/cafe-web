@@ -1,0 +1,8 @@
+services:
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cafe-web
+    ports:
+      - "172.22.0.1:3000:80"
