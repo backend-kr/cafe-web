@@ -35,6 +35,6 @@ const renderSearchBar = () => {
             </Box>
         </Grid>
     );
-//     ㅁㄴㅇㄴㄴㄴㄴㄴ
+//     ㅁㄴㅇㄴㄴㄴㄴㄴㅇㅇ
 };
 export default renderSearchBar;
