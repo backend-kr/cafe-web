@@ -1,5 +1,6 @@
 import NearCafeCard from "../NearCafe";
 import React from "react";
+import { Link } from 'react-router-dom';
 import { Box, Grid, Typography } from '@mui/material';
 
 const NearbyCafeList = ({ nearbyCafeData }) => {
@@ -12,19 +13,21 @@ const NearbyCafeList = ({ nearbyCafeData }) => {
                 <Grid container spacing={2} sx={{ padding: { xs: '5%', sm: '10%', md: '20%', lg: '30%' } }}>
                     {nearbyCafeData.map((cafe, index) => (
                         <Grid key={index} item xs={6} sm={6} md={6} lg={6}>
-                            <NearCafeCard
-                                name={cafe.title}
-                                address={cafe.address}
-                                roadAddress={cafe.road_address}
-                                latitude={cafe.latitude}
-                                longitude={cafe.longitude}
-                                tel={cafe.tel}
-                                homePage={cafe.home_page}
-                                businessHoursStart={cafe.business_hours_start}
-                                businessHoursEnd={cafe.business_hours_end}
-                                thumbnails={cafe.thumbnails}
-                                distance={cafe.distance}
-                            />
+                            <Link to={`/cafe/${cafe.title}`}>
+                                <NearCafeCard
+                                    name={cafe.title}
+                                    address={cafe.address}
+                                    roadAddress={cafe.road_address}
+                                    latitude={cafe.latitude}
+                                    longitude={cafe.longitude}
+                                    tel={cafe.tel}
+                                    homePage={cafe.home_page}
+                                    businessHoursStart={cafe.business_hours_start}
+                                    businessHoursEnd={cafe.business_hours_end}
+                                    thumbnails={cafe.thumbnails}
+                                    distance={cafe.distance}
+                                />
+                            </Link>
                         </Grid>
                     ))}
                 </Grid>

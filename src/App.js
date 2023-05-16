@@ -4,6 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { Box, Grid, Typography, InputBase, IconButton } from '@mui/material';
 import theme from './style/theme';
 import config from './components/config';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 import mbxGeocoding from "@mapbox/mapbox-sdk/services/geocoding";
@@ -12,6 +13,7 @@ import HotCafeList from './components/HotCafeList';
 import NearbyCafeList from './components/NearbyCafeList';
 import renderCategoryHeader from "./components/LocationCategory";
 import renderSearchBar from "./components/SearchBar";
+import CafeDetail from "./components/CafeDetail";
 
 const geocodingClient = mbxGeocoding({ accessToken: config.mapbox.accessToken });
 
@@ -74,18 +76,25 @@ function App() {
 
     return  (
         <ThemeProvider theme={theme}>
-            <Box>
-                {renderSearchBar()}
-                {renderCategoryHeader()}
-                {currentAddress ? (
-                    <NearbyCafeList nearbyCafeData={nearbyCafeData} />
-                ) : (
-                    <Box p={2} textAlign="center">
-                        <Typography variant="body1">현재 주소를 불러올 수 없습니다. 죄송합니다.</Typography>
-                    </Box>
-                )}
-                <HotCafeList cafeData={cafeData} />
-            </Box>
+            <Router>
+                <Routes>
+                    <Route path="/" element={
+                        <Box>
+                            {renderSearchBar()}
+                            {renderCategoryHeader()}
+                            {currentAddress ? (
+                                <NearbyCafeList nearbyCafeData={nearbyCafeData} />
+                            ) : (
+                                <Box p={2} textAlign="center">
+                                    <Typography variant="body1">현재 주소를 불러올 수 없습니다. 죄송합니다.</Typography>
+                                </Box>
+                            )}
+                            <HotCafeList cafeData={cafeData} />
+                        </Box>
+                    } />
+                    <Route path="/cafe/:title" element={<CafeDetail />} />
+                </Routes>
+            </Router>
         </ThemeProvider>
     );
 }
