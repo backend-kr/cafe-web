@@ -13,7 +13,7 @@ const NearbyCafeList = ({ nearbyCafeData }) => {
                 <Grid container spacing={2} sx={{ padding: { xs: '5%', sm: '10%', md: '20%', lg: '30%' } }}>
                     {nearbyCafeData.map((cafe, index) => (
                         <Grid key={index} item xs={6} sm={6} md={6} lg={6}>
-                            <Link to={`/cafe/${cafe.title}`}>
+                            <Link to={`/cafe/${encodeURIComponent(cafe.title)}`}>
                                 <NearCafeCard
                                     name={cafe.title}
                                     address={cafe.address}
