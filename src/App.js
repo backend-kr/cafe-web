@@ -8,21 +8,17 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import mbxGeocoding from "@mapbox/mapbox-sdk/services/geocoding";
 import useCafeData from './components/useCafeData';
-import HotCafeList from './components/HotCafeList';
 import CafeDetail from "./components/CafeDetail";
 import Header from './components/Header';
 import SearchBar from './components/Search';
 import Category from './components/Category';
 import NearbyCafes from './components/NearCafes';
 import BottomBar from './components/BottomBar'
-
+import VerticalAlignedText from './components/VerticalAlignedText'
 
 
 const geocodingClient = mbxGeocoding({ accessToken: config.mapbox.accessToken });
 const theme = createTheme({
-    // 기존의 테마 설정
-    // ...
-    // 추가적인 스타일 설정
     components: {
       MuiCssBaseline: {
         styleOverrides: {
@@ -118,18 +114,18 @@ function App() {
                         🔥가장 가까운 카페 List
                       </Typography>
                     </Box>
-                    <Box mt={1} sx={{ overflow: 'hidden' }}>
+                    <Box mt={1} sx={{ overflow: 'hidden', paddingLeft: '20px', paddingRight: '20px' }}>
                       <NearbyCafes nearbyCafeData={nearbyCafeData} />
                     </Box>
                     <Box p={2}>
                       <Typography variant="h6" component="div" style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>
                         금주의 핫플레이스
                       </Typography>
+                      <Box p={2}>
+                        <VerticalAlignedText cafeData={cafeData} />
+                      </Box>
                     </Box>
-                    <Box mt={1} sx={{ overflow: 'hidden' }}>
-                    <HotCafeList cafeData={cafeData} />
-                    </Box>
-                      <BottomBar />
+                    <BottomBar />
                   </Box>
                 }
               />
@@ -138,7 +134,7 @@ function App() {
           </Router>
         </ThemeProvider>
       );
-}
+    }
 
 export default App;
 

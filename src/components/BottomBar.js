@@ -14,7 +14,7 @@ function BottomBar() {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         boxShadow: '0px -2.21px 16.6px rgba(0, 0, 0, 0.6)',
         borderRadius: '16.6px 16.6px 0px 0px',
         paddingTop: '16px',

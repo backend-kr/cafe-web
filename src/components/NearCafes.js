@@ -20,6 +20,7 @@ function NearbyCafes({ nearbyCafeData }) {
         style={{
           display: 'flex',
           flexDirection: 'row',
+
           width: `${nearbyCafeData.length * 500}px`, // 300px + 16px margin
         }}
       >
@@ -33,6 +34,7 @@ function NearbyCafes({ nearbyCafeData }) {
               alignItems: 'center',
               width: '200px',
               height: '300px',
+              
               marginRight: index === nearbyCafeData.length - 1 ? 0 : '20px',
               paddingLeft: '8px',
               position: 'relative',
@@ -50,6 +52,8 @@ function NearbyCafes({ nearbyCafeData }) {
                   height: '90%',
                   borderRadius: '8px',
                   paddingBottom: '8px',
+                            justifyContent: 'center',
+          alignItems: 'center',
                 }}
               >
                 <Typography

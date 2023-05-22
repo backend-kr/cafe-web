@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import './CafeCard.css';
+
 
 const AnimatedCard = styled(Card)({
     transition: 'transform 0.3s ease-in-out',
