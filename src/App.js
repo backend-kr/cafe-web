@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { Box, Grid, Typography, InputBase, IconButton } from '@mui/material';
-import theme from './style/theme';
 import config from './components/config';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -10,14 +9,39 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import mbxGeocoding from "@mapbox/mapbox-sdk/services/geocoding";
 import useCafeData from './components/useCafeData';
 import HotCafeList from './components/HotCafeList';
-import NearbyCafeList from './components/NearbyCafeList';
-import renderCategoryHeader from "./components/LocationCategory";
-import renderSearchBar from "./components/SearchBar";
 import CafeDetail from "./components/CafeDetail";
+import Header from './components/Header';
+import SearchBar from './components/Search';
+import Category from './components/Category';
+import NearbyCafes from './components/NearCafes';
+import BottomBar from './components/BottomBar'
+
+
 
 const geocodingClient = mbxGeocoding({ accessToken: config.mapbox.accessToken });
-
+const theme = createTheme({
+    // 기존의 테마 설정
+    // ...
+    // 추가적인 스타일 설정
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          html: {
+            height: '100%',
+          },
+          body: {
+            height: '100%',
+            margin: 0,
+            overflow: 'hidden',
+          },
+        },
+      },
+    },
+  });
 function App() {
+    useEffect(() => {
+      document.documentElement.style.height = '100%'; // html 요소의 높이를 100%로 설정
+    }, []);
     const [currentLocation, setCurrentLocation] = useState(null);
     const [currentAddress, setCurrentAddress] = useState(null);
     const { cafeData, nearbyCafeData } = useCafeData(currentLocation);
@@ -74,29 +98,69 @@ function App() {
         }
     }, [currentLocation]);
 
-    return  (
+    return (
         <ThemeProvider theme={theme}>
-            <Router>
-                <Routes>
-                    <Route path="/" element={
-                        <Box>
-                            {renderSearchBar()}
-                            {renderCategoryHeader()}
-                            {currentAddress ? (
-                                <NearbyCafeList nearbyCafeData={nearbyCafeData} />
-                            ) : (
-                                <Box p={2} textAlign="center">
-                                    <Typography variant="body1">현재 주소를 불러올 수 없습니다. 죄송합니다.</Typography>
-                                </Box>
-                            )}
-                            <HotCafeList cafeData={cafeData} />
-                        </Box>
-                    } />
-                    <Route path="/cafe/:title" element={<CafeDetail />} />
-                </Routes>
-            </Router>
+          <Router>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Box p={2} pt={3} sx={{ backgroundColor: 'rgb(3, 30, 42)', minHeight: '100vh', overflow: 'hidden' }}>
+                    <Box mb={2}>
+                      <Header />
+                    </Box>
+                    <SearchBar />
+                    <Box mt={1} sx={{ overflow: 'hidden' }}>
+                      <Category />
+                    </Box>
+                    <Box p={2}>
+                      <Typography variant="h6" component="div" style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>
+                        🔥가장 가까운 카페 List
+                      </Typography>
+                    </Box>
+                    <Box mt={1} sx={{ overflow: 'hidden' }}>
+                      <NearbyCafes nearbyCafeData={nearbyCafeData} />
+                    </Box>
+                    <Box p={2}>
+                      <Typography variant="h6" component="div" style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>
+                        금주의 핫플레이스
+                      </Typography>
+                    </Box>
+                    <Box mt={1} sx={{ overflow: 'hidden' }}>
+                    <HotCafeList cafeData={cafeData} />
+                    </Box>
+                      <BottomBar />
+                  </Box>
+                }
+              />
+              <Route path="/cafe/:title" element={<CafeDetail />} />
+            </Routes>
+          </Router>
         </ThemeProvider>
-    );
+      );
 }
 
 export default App;
+
+
+{/* <ThemeProvider theme={theme}>
+<Router>
+    <Routes>
+        <Route path="/" element={
+            <Box>
+                {renderSearchBar()}
+                {renderCategoryHeader()}
+                {currentAddress ? (
+                    <NearbyCafeList nearbyCafeData={nearbyCafeData} />
+                ) : (
+                    <Box p={2} textAlign="center">
+                        <Typography variant="body1">현재 주소를 불러올 수 없습니다. 죄송합니다.</Typography>
+                    </Box>
+                )}
+                <HotCafeList cafeData={cafeData} />
+            </Box>
+        } />
+        <Route path="/cafe/:title" element={<CafeDetail />} />
+    </Routes>
+</Router>
+</ThemeProvider> */}
