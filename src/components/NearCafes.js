@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/system';
+import { Link } from 'react-router-dom';
 
 const StyledScrollbar = styled(Box)(({ theme }) => ({
   overflowX: 'auto',
@@ -25,6 +26,7 @@ function NearbyCafes({ nearbyCafeData }) {
         }}
       >
         {nearbyCafeData.map((cafe, index) => (
+          <Link key={index} to={`/cafe/${encodeURIComponent(cafe.title)}`} style={{ textDecoration: 'none' }}>
           <div
             className="cafe-card"
             key={cafe.id}
@@ -34,7 +36,6 @@ function NearbyCafes({ nearbyCafeData }) {
               alignItems: 'center',
               width: '200px',
               height: '300px',
-              
               marginRight: index === nearbyCafeData.length - 1 ? 0 : '20px',
               paddingLeft: '8px',
               position: 'relative',
@@ -52,8 +53,6 @@ function NearbyCafes({ nearbyCafeData }) {
                   height: '90%',
                   borderRadius: '8px',
                   paddingBottom: '8px',
-                            justifyContent: 'center',
-          alignItems: 'center',
                 }}
               >
                 <Typography
@@ -87,6 +86,7 @@ function NearbyCafes({ nearbyCafeData }) {
               </div>
             )}
           </div>
+          </Link>
         ))}
       </div>
     </StyledScrollbar>
