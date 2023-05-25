@@ -37,7 +37,7 @@ const CafeDetails = () => {
             <Slider {...settings}>
                 {cafeData.thumbnails.map((thumbnail, index) => (
                     <div key={index}>
-                        <img src={thumbnail.url} alt={`slide-${index}`} width="100%"/>
+                        <img src={thumbnail.url} alt={`slide-${index}`} style={{ width: '100%', height: '500px', objectFit: 'cover', objectPosition: 'center' }} />
                     </div>
                 ))}
             </Slider>
@@ -46,7 +46,7 @@ const CafeDetails = () => {
                 <Rating value={rating} readOnly />
                 <Typography variant="body2" ml={1}>{rating}</Typography>
                 <Typography variant="body2" ml={1}>({/*리뷰 수*/}5,243)</Typography>
-                <Typography variant="body2" ml={1}>숙소답변(3,236)</Typography>
+                <Typography variant="body2" ml={1}>카페리뷰(3,236)</Typography>
             </Box>
             <Box display="flex" alignItems="center">
                 <LocationOnIcon />
@@ -55,8 +55,19 @@ const CafeDetails = () => {
             <Typography variant="body1">Street Address: {cafeData.road_address}</Typography>
             <Typography variant="body1">Phone number: {cafeData.tel}</Typography>
             <Typography variant="body1">Home page: {cafeData.home_page}</Typography>
-            <Typography variant="body1">Hours: </Typography>
-
+            <Typography variant="body1">Hours: {cafeData.business_hours_start} ~ {cafeData.business_hours_end}</Typography>
+            
+            {cafeData.menu && (
+                <>
+                    <Typography variant="h5">Menu</Typography>
+                    {cafeData.menu.map((menu, index) => (
+                        <Box key={index} display="flex" alignItems="center">
+                            <Typography variant="body1">{menu.name}</Typography>
+                            <Typography variant="body1" ml={1}>가격: {menu.price}</Typography>
+                        </Box>
+                    ))}
+                </>
+            )}
         </Box>
     );
 };
